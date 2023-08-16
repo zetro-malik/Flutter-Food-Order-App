@@ -36,10 +36,3 @@ Follow these steps to set up and run the app:
 - Custom widgets
 - ...
 
-## Contributing
-
-Contributions are welcome! If you have any improvements or bug fixes, feel free to create a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
