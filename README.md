@@ -1,16 +1,42 @@
-# food_order_ui
+# Food Order App with Flutter
 
-A new Flutter project.
+Create a beautifully designed food order app using Flutter, following best practices and utilizing the GetX library for state management. The app will be built with the MVVM architecture and will showcase the use of custom widgets for a polished user interface.
+
+## Features
+
+- User-friendly and attractive UI design for a food order app.
+- Efficient state management using GetX library.
+- Follows the MVVM (Model-View-ViewModel) architecture for organized code.
+- Demonstrates professional coding practices.
+- Utilizes custom widgets to enhance the user experience.
+
+## Screenshots
+
+![Screenshot 1](https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173209.jpg)
+![Screenshot 2](https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173222.jpg)
+![Screenshot 3](https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173713.jpg)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Follow these steps to set up and run the app:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository: `git clone https://github.com/zetro-malik/Flutter-Food-Order-App.git`
+2. Open the project in your preferred IDE.
+3. Run `flutter pub get` to install the required dependencies.
+4. Run the app using `flutter run`.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Technologies Used
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- GetX for state management
+- MVVM architecture
+- Custom widgets
+- ...
+
+## Contributing
+
+Contributions are welcome! If you have any improvements or bug fixes, feel free to create a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
