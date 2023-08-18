@@ -114,7 +114,7 @@ class MenuView extends StatelessWidget {
 
 Widget tabView(){
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 22.0),
+      padding: EdgeInsets.symmetric(horizontal: 22.0),
       width: double.infinity,
       height: 170,
       child: ListView.builder(

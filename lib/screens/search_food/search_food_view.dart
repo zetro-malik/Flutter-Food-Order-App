@@ -27,18 +27,19 @@ class SearchFoodView extends StatelessWidget {
   }
 
   Widget productList(){
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: viewModel.products.length,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          child: GestureDetector(
-              onTap: () => Get.to(()=> ProductDetailView(),arguments:viewModel.products[index] ),
-              child: SearchCard(index: index,viewModel: viewModel)),
-        );
-      },
+    return Obx(() =>  ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: viewModel.products.value.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18),
+            child: GestureDetector(
+                onTap: () => Get.to(()=> ProductDetailView(),arguments:viewModel.products.value[index] ),
+                child: SearchCard(index: index,viewModel: viewModel)),
+          );
+        },
+      ),
     );
   }
 
@@ -177,7 +178,7 @@ class SearchFoodView extends StatelessWidget {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Apply filters and update product list
+                      viewModel.applyFilters();
                       Navigator.pop(context);
                     },
                     child: const Text('Apply Filters'),

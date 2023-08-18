@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_order_ui/helper/global_vars.dart';
 import 'package:food_order_ui/screens/cart/cart_model.dart';
 import 'package:food_order_ui/screens/product_detail/product_detail_viewmodel.dart';
@@ -70,7 +71,11 @@ class ProductDetailView extends StatelessWidget {
                 Text("Add Ons",style:  TextStyle(fontSize: 16,color: Colors.grey[700],fontWeight: FontWeight.w600),),
                 addOnsList(),
                 const SizedBox(height: 20),
-                CustomButton( text: "Add to Cart", onPressed: () => { GlobalVars.cartList.add(CartItem(viewModel.obj, viewModel.price.value, viewModel.quantityCount.value))}),
+                CustomButton( text: "Add to Cart", onPressed: ()  {
+                  GlobalVars.cartList.add(CartItem(viewModel.obj, viewModel.price.value, viewModel.quantityCount.value));
+                   HapticFeedback.lightImpact();
+                   Get.back();
+                }),
               ],
             ),
           ),

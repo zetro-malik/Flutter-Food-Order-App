@@ -7,13 +7,12 @@ import 'package:get/get.dart';
 
 class SearchFoodViewModel extends GetxController{
 
+  double filterRating = 0.0;
+
+
+  RxList<Product> products = <Product>[].obs; // Specify the data type
+
   RxInt selectedTab = 0.obs;
-  double filterRating = 0;
-
-
-
-  List<Product> products = GlobalVars.products;
-
 
   List<Map<String, String>> tabViewItems = [
     {
@@ -37,6 +36,14 @@ class SearchFoodViewModel extends GetxController{
 
   var priceRange = const RangeValues(0, 100).obs;
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    products.value=GlobalVars.products;
+
+  }
+
   void updatePriceRange(RangeValues values) {
     priceRange.value = values;
   }
@@ -48,6 +55,33 @@ class SearchFoodViewModel extends GetxController{
 
   updateSelectTab(newValue){
     selectedTab.value=newValue;
+  }
+
+   applyFilters() {
+    List<Product> filteredProducts = [...GlobalVars.products];
+
+    // Apply price range filter
+    filteredProducts = filteredProducts
+        .where((product) =>
+    product.price >= priceRange.value.start &&
+        product.price <= priceRange.value.end)
+        .toList();
+
+    // Apply category filter if not 'ALL'
+    if (selectedTab != 0) {
+      filteredProducts = filteredProducts
+          .where((product) => product.name.contains(tabViewItems[selectedTab.value]['name'].toString()))
+          .toList();
+    }
+
+    // Apply rating filter
+    if (filterRating > -1) {
+      filteredProducts = filteredProducts
+          .where((product) => product.rating >=filterRating)
+          .toList();
+    }
+
+    products.value = filteredProducts;
   }
 
 

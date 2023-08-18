@@ -6,8 +6,7 @@ import 'package:food_order_ui/screens/menu/menu_viewmodel.dart';
 import 'package:food_order_ui/screens/product_detail/product_detail_viewmodel.dart';
 import 'package:food_order_ui/widgets/custom_button.dart';
 import 'package:get/get.dart';
-
-
+import 'package:flutter/services.dart';
 
 class SearchCard extends StatelessWidget {
   final int index;
@@ -31,9 +30,9 @@ class SearchCard extends StatelessWidget {
         children: [
           Center(
               child: Hero(
-                  tag: viewModel.products[index].image,
+                  tag: viewModel.products.value[index].image,
                   child: Image.asset(
-                    viewModel.products[index].image,
+                    viewModel.products.value[index].image,
                     height: 150,
                     width: 150,
                   ))),
@@ -44,30 +43,32 @@ class SearchCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  viewModel.products[index].name!,
+                  viewModel.products.value[index].name!,
                   style: const TextStyle(color: Colors.black),
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  viewModel.products[index].description!,
+                  viewModel.products.value[index].description!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.grey,fontSize: 12),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 const SizedBox(height: 10),
-                getStarRating(viewModel.products[index].rating),
+                getStarRating(viewModel.products.value[index].rating),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    priceText(txt: viewModel.products[index].price!,fontSize: 18.0),
+                    priceText(
+                        txt: viewModel.products.value[index].price!, fontSize: 18.0),
                     InkWell(
                       onTap: () {
                         GlobalVars.cartList.value.add(CartItem(
-                            viewModel.products[index],
-                            viewModel.products[index].price,
+                            viewModel.products.value[index],
+                            viewModel.products.value[index].price,
                             1));
                         GlobalVars.cartList.refresh();
+                        HapticFeedback.lightImpact();
                       },
                       child: const CircleAvatar(
                         radius: 12,
@@ -89,7 +90,6 @@ class SearchCard extends StatelessWidget {
     );
   }
 
-
   Widget getStarRating(double rating) {
     int numStars = rating.floor();
     return Row(
@@ -105,11 +105,7 @@ class SearchCard extends StatelessWidget {
       }),
     );
   }
-
 }
-
-
-
 
 class CartItemCard extends StatelessWidget {
   final int index;
@@ -148,7 +144,10 @@ class CartItemCard extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                      onPressed: () => GlobalVars.removeItem(index),
+                      onPressed: () {
+                        GlobalVars.removeItem(index);
+                        HapticFeedback.selectionClick();
+                      },
                       icon: const Icon(
                         Icons.cancel_outlined,
                         color: Colors.red,
@@ -166,7 +165,10 @@ class CartItemCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
-                      onPressed: () => GlobalVars.subtractCounter(index),
+                      onPressed: () {
+                        HapticFeedback.vibrate();
+                        GlobalVars.subtractCounter(index);
+                      },
                       icon: const Icon(
                         Icons.remove_circle_outline,
                         color: Colors.deepPurple,
@@ -179,7 +181,10 @@ class CartItemCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   IconButton(
-                      onPressed: () => GlobalVars.addCounter(index),
+                      onPressed: () {
+                        GlobalVars.addCounter(index);
+                        HapticFeedback.vibrate();
+                      },
                       icon: const Icon(
                         Icons.add_circle_outline,
                         color: Colors.deepPurple,
@@ -217,7 +222,7 @@ class TabBarCard extends StatelessWidget {
             () => Container(
               height: 80,
               width: 80,
-              margin:const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(
                   color: viewModel.selectedTab.value == index
                       ? Colors.deepPurple
@@ -324,6 +329,7 @@ class GridCard extends StatelessWidget {
                       viewModel.products[index].price,
                       1));
                   GlobalVars.cartList.refresh();
+                  HapticFeedback.lightImpact();
                 },
                 child: const CircleAvatar(
                   radius: 12,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_order_ui/helper/global_vars.dart';
 import 'package:food_order_ui/screens/menu/product_model.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class ProductDetailViewModel extends GetxController {
   ];
 
   addCounter(){
+    HapticFeedback.vibrate();
     quantityCount.value +=1;
     price.value =quantityCount.value * obj.price;
   }
@@ -32,8 +34,11 @@ class ProductDetailViewModel extends GetxController {
     if(quantityCount.value == 1){
       return;
     }
+
     quantityCount.value -=1;
     price.value =quantityCount.value * obj.price;
+    HapticFeedback.vibrate();
+
 
 
 
