@@ -1,16 +1,38 @@
-# food_order_ui
+# Food Order App with Flutter
 
-A new Flutter project.
+Create a beautifully designed food order app using Flutter, following best practices and utilizing the GetX library for state management. The app will be built with the MVVM architecture and will showcase the use of custom widgets for a polished user interface.
+
+## Features
+
+- User-friendly and attractive UI design for a food order app.
+- Efficient state management using GetX library.
+- Follows the MVVM (Model-View-ViewModel) architecture for organized code.
+- Demonstrates professional coding practices.
+- Utilizes custom widgets to enhance the user experience.
+
+## Screenshots
+
+
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173209.jpg" width="250">
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173222.jpg" width="250">
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173713.jpg" width="250">
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Getting Started
 
-A few resources to get you started if this is your first Flutter project:
+Follow these steps to set up and run the app:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the repository: `git clone https://github.com/zetro-malik/Flutter-Food-Order-App.git`
+2. Open the project in your preferred IDE.
+3. Run `flutter pub get` to install the required dependencies.
+4. Run the app using `flutter run`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used
+
+- Flutter
+- GetX for state management
+- MVVM architecture
+- Custom widgets
+- ...
+
