@@ -21,6 +21,14 @@ class SearchFoodViewModel extends GetxController{
     {
       'name':"Dessert",
       "img":"asset/images/cake-removebg-preview.png",
-    }
+    },
+
   ];
+
+
+  updateSelectTab(newValue){
+    selectedTab.value=newValue;
+  }
+
+
 }

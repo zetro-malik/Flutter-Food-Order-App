@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order_ui/screens/search_food/search_food_viewmodel.dart';
+import 'package:food_order_ui/widgets/custom_widgets.dart';
 import 'package:food_order_ui/widgets/product_cards.dart';
 import 'package:get/get.dart';
 
@@ -78,36 +79,58 @@ class SearchFoodView extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-             const Text(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 16),
+            const  Padding(
+             padding:  EdgeInsets.symmetric(horizontal: 16.0),
+             child:  Text(
                 'Filter Options',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
-              const Text('Price Range'),
-              RangeSlider(
-                values: RangeValues(0, 100),
+           ),
+            const SizedBox(height: 16),
+            const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 16.0),
+              child:  Text('Price Range'),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: RangeSlider(
+                values: const RangeValues(0, 100),
                 min: 0,
                 max: 100,
                 onChanged: (RangeValues values) {
                   // Handle price range changes
                 },
               ),
-              tabView(),
-              const SizedBox(height: 16),
-              const Text('Rating'),
-              RatingSelector(
+            ),
+            const SizedBox(height: 16),
+            const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 16.0),
+              child:  Text('Select Category'),
+            ),
+            tabView(),
+            const SizedBox(height: 16),
+            const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 16.0),
+              child:  Text('Rating'),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: RatingSelector(
                 onChanged: (double rating) {
                   // Handle rating changes
                 },
               ),
-              const SizedBox(height: 16),
-              Expanded(
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Align(
+                alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
                     // Apply filters and update product list
@@ -116,8 +139,10 @@ class SearchFoodView extends StatelessWidget {
                   child: const Text('Apply Filters'),
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+
+          ],
         );
       },
     );
@@ -125,17 +150,14 @@ class SearchFoodView extends StatelessWidget {
 
 
   Widget tabView(){
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 22.0),
+    return SizedBox(
       width: double.infinity,
-      height: 170,
+      height: 120,
       child: ListView.builder(
         itemCount: viewModel.tabViewItems.length,
         scrollDirection:Axis.horizontal,
         itemBuilder: (context, index) {
-
           return TabBarCard(index: index, viewModel: viewModel);
-
         },),
     );
   }
@@ -144,39 +166,3 @@ class SearchFoodView extends StatelessWidget {
 
 
 
-
-class RatingSelector extends StatefulWidget {
-  final ValueChanged<double> onChanged;
-
-  RatingSelector({required this.onChanged});
-
-  @override
-  _RatingSelectorState createState() => _RatingSelectorState();
-}
-
-class _RatingSelectorState extends State<RatingSelector> {
-  double _rating = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Text('Select Rating: '),
-        const SizedBox(width: 8),
-        Slider(
-          value: _rating,
-          onChanged: (value) {
-            setState(() {
-              _rating = value;
-              widget.onChanged(_rating);
-            });
-          },
-          min: 0,
-          max: 5,
-          divisions: 5,
-          label: _rating.toString(),
-        ),
-      ],
-    );
-  }
-}
