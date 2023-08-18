@@ -28,6 +28,14 @@ class SearchFoodViewModel extends GetxController{
       "img":"asset/images/pizza.png",
     },
     {
+      'name':"Steak",
+      "img":"asset/images/steak.png",
+    },
+    {
+      'name':"Snacks",
+      "img":"asset/images/fries.png",
+    },
+    {
       'name':"Dessert",
       "img":"asset/images/cake-removebg-preview.png",
     },

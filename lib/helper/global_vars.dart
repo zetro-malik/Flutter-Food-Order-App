@@ -9,11 +9,11 @@ class GlobalVars{
 
 
   static List<Product> products = [
-    Product('asset/images/burger-removebg-preview.png', 'Beef Burger', 20, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8),
-    Product('asset/images/pizza.png', 'Chesese Pizza', 32, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',2.8),
-    Product('asset/images/steak-removebg-preview.png', 'Beef Steak', 48, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',3.2),
-    Product('asset/images/cake-removebg-preview.png', 'Chocolate Cake', 12, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8),
-    Product('asset/images/fries.png', 'French Fries', 4, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8),
+    Product('asset/images/burger-removebg-preview.png', 'Beef Burger', 20, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8,"Burger"),
+    Product('asset/images/pizza.png', 'Chesese Pizza', 32, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',2.8,"Pizza"),
+    Product('asset/images/steak-removebg-preview.png', 'Beef Steak', 48, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',3.2,"Steak"),
+    Product('asset/images/cake-removebg-preview.png', 'Chocolate Cake', 12, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8,"Dessert"),
+    Product('asset/images/fries.png', 'French Fries', 4, 'Big juicy beef burger with cheese, lettuce, tomator, onions, and special saucer!',4.8,"Snacks"),
   ];
 
   static addCounter(index){
