@@ -96,15 +96,34 @@ class SearchFoodView extends StatelessWidget {
               padding:  EdgeInsets.symmetric(horizontal: 16.0),
               child:  Text('Price Range'),
             ),
+
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: RangeSlider(
-                values: const RangeValues(0, 100),
-                min: 0,
-                max: 100,
-                onChanged: (RangeValues values) {
-                  // Handle price range changes
-                },
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Obx(() =>  Column(
+                children: [
+                  RangeSlider(
+                      values: viewModel.priceRange.value,
+                      min: 0,
+                      max: 100,
+                      divisions: 10,
+                      onChanged: (RangeValues values) {
+                       viewModel.updatePriceRange(values);
+                      },
+                    ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("From :${viewModel.priceRange.value.start.toString()}",style:const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
+                        Text("To :${viewModel.priceRange.value.end.toString()}",style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
+
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               ),
             ),
             const SizedBox(height: 16),
@@ -122,7 +141,7 @@ class SearchFoodView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: RatingSelector(
                 onChanged: (double rating) {
-                  // Handle rating changes
+                  viewModel.updateFilterRating(rating);
                 },
               ),
             ),
