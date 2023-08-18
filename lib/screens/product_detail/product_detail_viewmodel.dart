@@ -37,7 +37,6 @@ class ProductDetailViewModel extends GetxController {
 
 
 
-
   }
 
   @override
@@ -52,5 +51,7 @@ class ProductDetailViewModel extends GetxController {
 
     super.dispose();
   }
+
+
 
 }

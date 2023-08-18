@@ -7,6 +7,90 @@ import 'package:food_order_ui/screens/product_detail/product_detail_viewmodel.da
 import 'package:food_order_ui/widgets/custom_button.dart';
 import 'package:get/get.dart';
 
+
+
+class SearchCard extends StatelessWidget {
+  final int index;
+  final dynamic viewModel;
+
+  const SearchCard({Key? key, required this.index, required this.viewModel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).orientation == Orientation.portrait
+          ? 100
+          : 150,
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.grey[200], borderRadius: BorderRadius.circular(15)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+              child: Hero(
+                  tag: viewModel.products[index].image,
+                  child: Image.asset(
+                    viewModel.products[index].image,
+                    height: 150,
+                    width: 150,
+                  ))),
+          const SizedBox(height: 5),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  viewModel.products[index].name!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  viewModel.products[index].description!,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.grey,fontSize: 12),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    priceText(txt: viewModel.products[index].price!,fontSize: 18.0),
+                    InkWell(
+                      onTap: () {
+                        GlobalVars.cartList.value.add(CartItem(
+                            viewModel.products[index],
+                            viewModel.products[index].price,
+                            1));
+                        GlobalVars.cartList.refresh();
+                      },
+                      child: const CircleAvatar(
+                        radius: 12,
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
 class CartItemCard extends StatelessWidget {
   final int index;
   const CartItemCard({Key? key, required this.index}) : super(key: key);
@@ -76,7 +160,7 @@ class CartItemCard extends StatelessWidget {
                   const SizedBox(width: 16),
                   IconButton(
                       onPressed: () => GlobalVars.addCounter(index),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_circle_outline,
                         color: Colors.deepPurple,
                       )),
@@ -113,7 +197,7 @@ class TabBarCard extends StatelessWidget {
             () => Container(
               height: 80,
               width: 80,
-              margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              margin:const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(
                   color: viewModel.selectedTab.value == index
                       ? Colors.deepPurple
@@ -129,7 +213,7 @@ class TabBarCard extends StatelessWidget {
         const SizedBox(height: 5),
         Text(
           viewModel.tabViewItems[index]['name']!,
-          style: TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Colors.grey),
         )
       ],
     );

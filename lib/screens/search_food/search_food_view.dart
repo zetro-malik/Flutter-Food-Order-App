@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_ui/screens/product_detail/product_detail_view.dart';
+import 'package:food_order_ui/screens/product_detail/product_detail_viewmodel.dart';
 import 'package:food_order_ui/screens/search_food/search_food_viewmodel.dart';
 import 'package:food_order_ui/widgets/custom_widgets.dart';
 import 'package:food_order_ui/widgets/product_cards.dart';
@@ -9,49 +11,67 @@ class SearchFoodView extends StatelessWidget {
 
   final SearchFoodViewModel viewModel = Get.put(SearchFoodViewModel());
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: SingleChildScrollView(
         child: Column(
-
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top:  50.0,right: 18 ),
-            child: Row(
-              children: [
-                Expanded(child: searchTextForm()),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: Colors.deepPurple,
-                  ),
-
-                  height: 50,
-                  width: 50,
-
-                  child: Column(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.filter_list, // where I want to add 3 horizontal line icon
-                          color: Colors.white,
-                        ), onPressed:() => _showFilterBottomSheet(context),
-                      ),
-                    ],
-
-
-                  ),
-                )
-              ],
-            ),
-          )
+         searchWithFilter(context),
+          const SizedBox(height: 20,),
+          productList()
+          
         ],
       ),
     ));
   }
 
+  Widget productList(){
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: viewModel.products.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: GestureDetector(
+              onTap: () => Get.to(()=> ProductDetailView(),arguments:viewModel.products[index] ),
+              child: SearchCard(index: index,viewModel: viewModel)),
+        );
+      },
+    );
+  }
+
+  Widget searchWithFilter(context){
+    return  Padding(
+      padding: const EdgeInsets.only(top:  50.0,right: 18 ),
+      child: Row(
+        children: [
+          Expanded(child: searchTextForm()),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: Colors.deepPurple,
+            ),
+            height: 50,
+            width: 50,
+            child: Column(
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.filter_list, // where I want to add 3 horizontal line icon
+                    color: Colors.white,
+                  ), onPressed:() => _showFilterBottomSheet(context),
+                ),
+              ],
+
+
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   Widget searchTextForm(){
     return Padding(
@@ -77,91 +97,94 @@ class SearchFoodView extends StatelessWidget {
 
   void _showFilterBottomSheet(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 16),
-            const  Padding(
-             padding:  EdgeInsets.symmetric(horizontal: 16.0),
-             child:  Text(
-                'Filter Options',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              const  Padding(
+               padding:  EdgeInsets.symmetric(horizontal: 16.0),
+               child:  Text(
+                  'Filter Options',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+             ),
+              const SizedBox(height: 16),
+              const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 16.0),
+                child:  Text('Price Range'),
               ),
-           ),
-            const SizedBox(height: 16),
-            const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.0),
-              child:  Text('Price Range'),
-            ),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Obx(() =>  Column(
-                children: [
-                  RangeSlider(
-                      values: viewModel.priceRange.value,
-                      min: 0,
-                      max: 100,
-                      divisions: 10,
-                      onChanged: (RangeValues values) {
-                       viewModel.updatePriceRange(values);
-                      },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Obx(() =>  Column(
+                  children: [
+                    RangeSlider(
+                        values: viewModel.priceRange.value,
+                        min: 0,
+                        max: 100,
+                        divisions: 10,
+                        onChanged: (RangeValues values) {
+                         viewModel.updatePriceRange(values);
+                        },
+                      ),
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("From :${viewModel.priceRange.value.start.toString()}",style:const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
+                          Text("To :${viewModel.priceRange.value.end.toString()}",style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
+
+                        ],
+                      ),
                     ),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("From :${viewModel.priceRange.value.start.toString()}",style:const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
-                        Text("To :${viewModel.priceRange.value.end.toString()}",style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),),
-
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.0),
-              child:  Text('Select Category'),
-            ),
-            tabView(),
-            const SizedBox(height: 16),
-            const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.0),
-              child:  Text('Rating'),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: RatingSelector(
-                onChanged: (double rating) {
-                  viewModel.updateFilterRating(rating);
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Align(
-                alignment: Alignment.center,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Apply filters and update product list
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Apply Filters'),
+                  ],
+                ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
+              const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 16.0),
+                child:  Text('Select Category'),
+              ),
+              tabView(),
+              const SizedBox(height: 16),
+              const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 16.0),
+                child:  Text('Rating'),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: RatingSelector(
+                  onChanged: (double rating) {
+                    viewModel.updateFilterRating(rating);
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Apply filters and update product list
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Apply Filters'),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
 
-          ],
+            ],
+          ),
         );
       },
     );
