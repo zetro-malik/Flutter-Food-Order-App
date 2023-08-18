@@ -55,6 +55,8 @@ class SearchCard extends StatelessWidget {
                   style: const TextStyle(color: Colors.grey,fontSize: 12),
                 ),
                 const SizedBox(height: 10),
+                getStarRating(viewModel.products[index].rating),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -86,6 +88,24 @@ class SearchCard extends StatelessWidget {
       ),
     );
   }
+
+
+  Widget getStarRating(double rating) {
+    int numStars = rating.floor();
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(5, (index) {
+        if (index < numStars) {
+          return Icon(Icons.star, color: Colors.yellow[800]);
+        } else if (index == numStars && rating - numStars >= 0.5) {
+          return Icon(Icons.star_half, color: Colors.yellow[800]);
+        } else {
+          return Icon(Icons.star_border, color: Colors.yellow[800]);
+        }
+      }),
+    );
+  }
+
 }
 
 
