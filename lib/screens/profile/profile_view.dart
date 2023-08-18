@@ -83,7 +83,7 @@ class ProfileView extends StatelessWidget {
               color: Colors.grey.withOpacity(0.4), // Shadow color
               spreadRadius: 1,
               blurRadius: 3,
-              offset: Offset(-3, 3), // Shadow position (horizontal, vertical)
+              offset: const Offset(-3, 3), // Shadow position (horizontal, vertical)
             ),
           ],
         ),

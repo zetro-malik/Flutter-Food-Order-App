@@ -158,7 +158,7 @@ class CartItemCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: priceText(
                     txt: GlobalVars.cartList.value[index].price!,
-                    fontSize: 12.0),
+                    fontSize: 16.0),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -208,39 +208,43 @@ class TabBarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () {
-            if (viewModel.selectedTab.value == index) {
-              return;
-            }
-            viewModel.updateSelectTab(index);
-          },
-          child: Obx(
-            () => Container(
-              height: 80,
-              width: 80,
-              margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: BoxDecoration(
-                  color: viewModel.selectedTab.value == index
-                      ? Colors.deepPurple
-                      : Colors.grey[200],
-                  borderRadius: BorderRadius.circular(15)),
-              child: Image.asset(
-                viewModel.tabViewItems[index]['img']!,
-                scale: 1.2,
+    return SizedBox(
+      height:  MediaQuery.of(context).orientation == Orientation.portrait ?120:220,
+     width:  MediaQuery.of(context).orientation == Orientation.portrait ?90:160,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (viewModel.selectedTab.value == index) {
+                return;
+              }
+              viewModel.updateSelectTab(index);
+            },
+            child: Obx(
+              () => Container(
+                height: MediaQuery.of(context).orientation == Orientation.portrait ?80:120,
+                width:  MediaQuery.of(context).orientation == Orientation.portrait ?80:120,
+                margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                decoration: BoxDecoration(
+                    color: viewModel.selectedTab.value == index
+                        ? Colors.deepPurple
+                        : Colors.grey[200],
+                    borderRadius: BorderRadius.circular(15)),
+                child: Image.asset(
+                  viewModel.tabViewItems[index]['img']!,
+                  scale: 1.2,
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          viewModel.tabViewItems[index]['name']!,
-          style: const TextStyle(color: Colors.grey),
-        )
-      ],
+          const SizedBox(height: 5),
+          Text(
+            viewModel.tabViewItems[index]['name']!,
+            style: const TextStyle(color: Colors.grey),
+          )
+        ],
+      ),
     );
   }
 }

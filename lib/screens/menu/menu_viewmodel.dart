@@ -27,7 +27,15 @@ class MenuModel extends GetxController with SingleGetTickerProviderMixin {
     {
       'name':"Dessert",
       "img":"asset/images/cake-removebg-preview.png",
-    }
+    },
+    {
+      'name':"Snacks",
+      "img":"asset/images/fries.png",
+    },
+    {
+      'name':"Dessert",
+      "img":"asset/images/cake-removebg-preview.png",
+    },
   ];
   late AnimationController animationController;
   late Animation<double> animation;
