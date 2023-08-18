@@ -92,7 +92,7 @@ class CartItemCard extends StatelessWidget {
 
 class TabBarCard extends StatelessWidget {
   final int index;
-  final MenuModel viewModel;
+  final dynamic viewModel;
 
   const TabBarCard({Key? key, required this.index, required this.viewModel})
       : super(key: key);
