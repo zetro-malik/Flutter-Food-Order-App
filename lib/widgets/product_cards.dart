@@ -328,7 +328,8 @@ class GridCard extends StatelessWidget {
               priceText(txt: viewModel.products[index].price!),
               InkWell(
                 onTap: () {
-                  GlobalVars.cartList.value.add(CartItem(
+                  GlobalVars.cartList.value.add(
+                      CartItem(
                       viewModel.products[index],
                       viewModel.products[index].price,
                       1));
