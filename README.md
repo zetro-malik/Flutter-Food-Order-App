@@ -1,6 +1,6 @@
 # Food Order App with Flutter
 
-Create a beautifully designed food order app using Flutter, following best practices and utilizing the GetX library for state management. The app will be built with the MVVM architecture and will showcase the use of custom widgets for a polished user interface.
+Create a beautifully designed food order app using Flutter, following best practices and utilizing the GetX library for state management. The app will be built with the MVVM architecture and will showcase the use of custom widgets for a polished user interface with haptic feedback.
 
 ## Features
 
