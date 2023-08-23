@@ -15,7 +15,10 @@ Create a beautifully designed food order app using Flutter, following best pract
 
 <img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173209.jpg" width="250">
 <img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173222.jpg" width="250">
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230823_104449.jpg" width="250">
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230823_104508.jpg" width="250">
 <img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230816_173713.jpg" width="250">
+<img src="https://github.com/zetro-malik/Flutter-Food-Order-App/blob/master/screenshots/Screenshot_20230823_104518.jpg" width="250">
 
 ## Getting Started
 
